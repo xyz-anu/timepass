@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Best Friend 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #f6d365, #fda085);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      animation: backgroundShift 10s ease infinite alternate;
+    }
+
+    @keyframes backgroundShift {
+      0% { background: linear-gradient(135deg, #f6d365, #fda085); }
+      50% { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+      100% { background: linear-gradient(135deg, #f6d365, #fda085); }
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      animation: popIn 1s ease;
+      z-index: 1;
+      max-width: 90%;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    button {
+      padding: 12px 25px;
+      margin: 10px;
+      border: none;
+      border-radius: 50px;
+      background-color: #ff7eb3;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff758c;
+      transform: scale(1.1);
+    }
+
+    #anushkaBtn {
+      position: relative;
+    }
+
+    #noteBtn {
+      display: none;
+      background-color: #7ed6df;
+    }
+
+    .message, .noteText {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #5f27cd;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* CSS Floating Elements (Flowers & Hearts) */
+    .floating {
+      position: absolute;
+      bottom: -50px;
+      font-size: 2rem;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive text */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+      .message, .noteText {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Who is better friend among the two?</h1>
+    <button id="anushkaBtn">Anushka</button>
+    <button id="ameyaBtn">Ameya</button>
+    <div class="message" id="message"></div>
+    <button id="noteBtn">Note</button>
+    <div class="noteText" id="noteText"></div>
+  </div>
+
+  <!-- Add floating flowers and hearts -->
+  <script>
+    const anushkaBtn = document.getElementById('anushkaBtn');
+    const ameyaBtn = document.getElementById('ameyaBtn');
+    const messageDiv = document.getElementById('message');
+    const noteBtn = document.getElementById('noteBtn');
+    const noteText = document.getElementById('noteText');
+
+    // Prevent Anushka from being clicked
+    anushkaBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert("Nice try 😉 But you have to pick Ameya!");
+    });
+
+    // Make Anushka button move around on hover
+    anushkaBtn.addEventListener('mouseover', () => {
+      const containerRect = document.querySelector('.container').getBoundingClientRect();
+      const maxX = containerRect.width - anushkaBtn.offsetWidth;
+      const maxY = containerRect.height - anushkaBtn.offsetHeight;
+
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+
+      anushkaBtn.style.position = 'absolute';
+      anushkaBtn.style.left = `${randomX}px`;
+      anushkaBtn.style.top = `${randomY}px`;
+    });
+
+    // When Ameya is clicked
+    ameyaBtn.addEventListener('click', () => {
+      messageDiv.textContent = "Of course it's Ameya! 💖 Ameya loves his best friend Anushka the most! 🥰";
+      messageDiv.style.opacity = 1;
+      noteBtn.style.display = "inline-block";
+    });
+
+    // When Note button is clicked
+    noteBtn.addEventListener('click', () => {
+      noteText.textContent = "Thank you so much for always being so kind and caring towards me. The way you always bring me fruits, how you always make sure I do less work, and you complete mine instead. I love you so so much, my amazing friend.";
+      noteText.style.opacity = 1;
+    });
+
+    // Create multiple floating flowers and hearts
+    const emojis = ["🌸", "❤️", "🌹", "💖"];
+    for (let i = 0; i < 40; i++) {
+      const floating = document.createElement('div');
+      floating.classList.add('floating');
+      floating.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      floating.style.left = `${Math.random() * 100}vw`;
+      floating.style.animationDelay = `${Math.random() * 5}s`;
+      floating.style.animationDuration = `${5 + Math.random() * 5}s`;
+      document.body.appendChild(floating);
+    }
+  </script>
+</body>
+</html>
